@@ -53,6 +53,12 @@ function html() {
         .pipe(browserSync.stream());
 }
 
+// Task to fonts
+function fonts() {
+    return gulp.src("./src/fonts/**/*.{ttf,woff,eof,svg}")
+        .pipe(gulp.dest("./build/src/fonts"));
+}
+
 // Task to Compile Sass
 function styles() {
     return gulp.src("./src/sass/style.sass")
@@ -147,8 +153,12 @@ function watch() {
 }
 
 // Task to Clean
-function clean() {
-    return del(["build/*"]);
+function clean(cb) {
+    return del([
+        "build/*",
+        "!build/fonts",
+        "!build/fonts/**"
+    ], cb);
 }
 
 // Define complex tasks
@@ -156,6 +166,7 @@ const build = gulp.series(
     clean,
     gulp.parallel(
         html,
+        fonts,
         styles,
         scripts,
         svg,
@@ -170,6 +181,7 @@ const dev = gulp.series(
 
 // Export tasks
 exports.html = html;
+exports.fonts = fonts;
 exports.styles = styles;
 exports.scripts = scripts;
 exports.svg = svg;

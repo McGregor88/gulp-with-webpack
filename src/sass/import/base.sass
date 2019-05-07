@@ -11,9 +11,9 @@ html, body
 body
 	min-width: 320px
 	position: relative
-	background: #fff
+	background: $white
 	font-size: 16px
-	color: #000
+	color: $black
 	font-family: $regular
 	overflow-x: hidden
 	opacity: 1
@@ -25,24 +25,27 @@ body
 
 img
 	max-width: 100%
+	object-fit: cover
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6,
+p
 	margin: 0
-	font-family: inherit
-	font-weight: 500
-	line-height: 1.1
 	color: inherit
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6
+	font-family: inherit
+	font-weight: 700
+	line-height: 1.1
 
 h1, .h1
 	font-size: 36px
@@ -69,12 +72,13 @@ small, .small
 a
 	color: #999
 	text-decoration: none
-	transition: color .25s ease
+	transition: color 0.25s ease
+
 	&:hover,
 	&:focus,
 	&:active,
 	&.active
-		color: #000
+		color: $black
 		text-decoration: none
 ul
 	list-style: none
