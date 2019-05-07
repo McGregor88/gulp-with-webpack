@@ -1,0 +1,18 @@
+//- index.pug
+
+body(style='font-family: sans-serif; padding: 0.64em 1em;' , link='#777' , vlink='#777')
+	-
+		var pages = [
+			{
+				title: 'Главная',
+				url: 'main.html'
+			}
+		];
+
+	ol
+		each page in pages
+			- var url = "javascript:void(0);";
+			- if (page.url != '') url = page.url;
+
+			li: h4
+				a(href=url, target="_blank") #{page.title}

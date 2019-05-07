@@ -2,6 +2,8 @@
 
 // Load plugins
 const gulp = require("gulp");
+const pug = require("gulp-pug");
+const plumber = require("gulp-plumber");
 const concat = require("gulp-concat");
 const autoprefixer = require("gulp-autoprefixer");
 const csscomb = require('gulp-csscomb');
@@ -12,6 +14,8 @@ const browserSync = require("browser-sync").create();
 const sourcemaps = require("gulp-sourcemaps");
 const webpack = require("webpack-stream");
 const gulpif = require("gulp-if");
+const errorHandler = require("./util/handle-errors.js");
+const notify = require("gulp-notify");
 
 let isDev = false;
 let isProd = !isDev;
@@ -34,8 +38,14 @@ const webpackConfig = {
 
 // Task to Build HTML
 function html() {
-    return gulp.src("./src/**/*.html")
-        .pipe(gulp.dest("./build"))
+    return gulp.src("src/templates/pages/*.pug")
+        .pipe(plumber({
+            errorHandler: errorHandler
+        }))
+        .pipe(pug({
+            pretty: true
+        }))
+        .pipe(gulp.dest("./build/"))
         .pipe(browserSync.stream());
 }
 
@@ -89,7 +99,7 @@ function images() {
         .pipe(gulp.dest("build/src/img"))
 }
 
-// Task to Watch Templates Changes
+// Task to Watch Templates Changes and Styles
 function watch() {
     browserSync.init({
         server: {
@@ -98,7 +108,7 @@ function watch() {
     });
 
     gulp.watch("./src/css/**/*.css", styles);
-    gulp.watch("./*.html", browserSync.reload);
+    gulp.watch("./src/templates/**/*.pug", gulp.parallel(html));
 }
 
 // Task to Clean

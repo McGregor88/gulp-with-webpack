@@ -1,0 +1,12 @@
+//- Mixin params: 
+//-   required: boolean
+//-   label:	string
+//-	  name: 	string
+
+mixin input_field(obj)
+	- var required_class=""; if (obj && obj.required === true) required_class = " form-field--required"
+	- var input_value = ""; if (obj.value) input_value = obj.value;
+
+	div(class="form-field" + required_class)
+		label #{obj.label}
+		input(type="text" class="form-field__element" placeholder=`${input_value}` name=`${obj.name}` )/

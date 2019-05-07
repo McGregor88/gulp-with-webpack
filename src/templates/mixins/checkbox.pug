@@ -1,0 +1,12 @@
+
+mixin checkbox(obj)
+	- var checked = obj.checked || false;
+	.checkbox
+		input(
+			type="checkbox"
+			id=obj.id 
+			name=obj.name 
+			checked=checked
+		)/
+
+		label(for=obj.id) #{obj.label}

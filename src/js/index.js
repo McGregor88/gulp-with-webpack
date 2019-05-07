@@ -11,7 +11,6 @@ console.log(divide(105, 2));
 $(document).ready(function () {
 
     console.log(1);
-    $(".page-title").addClass("color-black");
 
 });
 

@@ -1,0 +1,15 @@
+//- head.pug
+- var version = 1;
+
+meta(charset="utf-8")/
+meta(http-equiv="X-UA-Compatible" content="IE=edge")/
+meta(name="viewport" content="width=device-width, initial-scale=1")/
+//-meta(name="viewport" content="width=1366")/
+// disable safari phone number detection
+meta(name="format-detection" content="telephone=no")/
+
+title Project title
+//-link(rel="icon" type="image/png" href="favicon.png")/
+
+link(href="src/css/style.css?v=" + version rel="stylesheet")/
+script(src="src/js/scripts.js?v=" + version)
