@@ -42,7 +42,7 @@ const webpackConfig = {
 
 // Task to Build HTML
 function html() {
-    return gulp.src("src/templates/pages/*.pug")
+    return gulp.src("./src/templates/pages/*.pug")
         .pipe(plumber({
             errorHandler: errorHandler
         }))
@@ -137,7 +137,7 @@ function images() {
                 ]
             })
         ]))
-        .pipe(gulp.dest("build/src/img"))
+        .pipe(gulp.dest("./build/src/img"))
 }
 
 // Task to Watch Templates Changes and Styles
@@ -153,12 +153,8 @@ function watch() {
 }
 
 // Task to Clean
-function clean(cb) {
-    return del([
-        "build/*",
-        "!build/fonts",
-        "!build/fonts/**"
-    ], cb);
+function clean() {
+    return del(["build/*"]);
 }
 
 // Define complex tasks
