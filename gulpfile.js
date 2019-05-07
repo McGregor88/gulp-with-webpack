@@ -71,18 +71,6 @@ function styles() {
         .pipe(browserSync.stream());
 }
 
-// Task to Compile Sass
-function css() {
-    return gulp.src("./src/sass/style.sass")
-        .pipe(sass({
-            outputStyle: "expanded"
-        }).on("error", notify.onError()))
-        .pipe(autoprefixer(["last 15 versions"]))
-        .pipe(csscomb())
-        .pipe(gulp.dest("./build/src/css/"))
-        .pipe(browsersync.stream());
-}
-
 // Task to scripts
 function scripts() {
     return gulp.src("./src/js/index.js")
