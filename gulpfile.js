@@ -1,13 +1,22 @@
+"use strict";
+
+// Load plugins
 const gulp = require("gulp");
 const concat = require("gulp-concat");
 const autoprefixer = require("gulp-autoprefixer");
+const csscomb = require('gulp-csscomb');
 const cleanCSS = require("gulp-clean-css");
 const del = require("del");
 const imagemin = require("gulp-imagemin");
 const browserSync = require("browser-sync").create();
-//const sourcemaps   = require("gulp-sourcemaps");
+const sourcemaps = require("gulp-sourcemaps");
 const webpack = require("webpack-stream");
+const gulpif = require("gulp-if");
 
+let isDev = false;
+let isProd = !isDev;
+
+// Webpack config
 const webpackConfig = {
     output: {
         filename: "scripts.js"
@@ -18,15 +27,19 @@ const webpackConfig = {
             loader: "babel-loader",
             exclude: "/node_modules/"
         }]
-    }
+    },
+    mode: isDev ? "development" : "production",
+    devtool: isDev ? "eval-source-map" : "none"
 }
 
+// Task to Build HTML
 function html() {
     return gulp.src("./src/**/*.html")
         .pipe(gulp.dest("./build"))
         .pipe(browserSync.stream());
 }
 
+// Task to Compile Sass
 function styles() {
     return gulp.src("./src/css/**/*.css")
         .pipe(concat("styles.css"))
@@ -34,13 +47,15 @@ function styles() {
             browsers: ["> 0.1%"],
             cascade: false
         }))
-        .pipe(cleanCSS({
+        .pipe(gulpif(isDev, csscomb()))
+        .pipe(gulpif(isProd, cleanCSS({
             level: 2
-        }))
+        })))
         .pipe(gulp.dest("./build/src/css"))
         .pipe(browserSync.stream());
 }
 
+// Task to scripts
 function scripts() {
     return gulp.src("./src/js/index.js")
         .pipe(webpack(webpackConfig))
@@ -48,6 +63,7 @@ function scripts() {
         .pipe(browserSync.stream());
 }
 
+// Task to Optimize Images
 function images() {
     return gulp.src("./src/img/**/*")
         .pipe(imagemin([
@@ -73,6 +89,7 @@ function images() {
         .pipe(gulp.dest("build/src/img"))
 }
 
+// Task to Watch Templates Changes
 function watch() {
     browserSync.init({
         server: {
@@ -84,6 +101,7 @@ function watch() {
     gulp.watch("./*.html", browserSync.reload);
 }
 
+// Task to Clean
 function clean() {
     return del(["build/*"]);
 }
