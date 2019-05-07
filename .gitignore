@@ -1,0 +1,14 @@
+# Add any directories, files, or patterns you don't want to be tracked by version control
+# Numerous always-ignore extensions
+*.log
+*.zip
+.idea
+
+# OS or Editor folders
+.DS_Store
+Thumbs.db
+
+# Folders to ignore
+node_modules
+build/*.html
+build/src/css/styles.css
