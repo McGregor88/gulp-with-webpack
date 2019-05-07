@@ -9,6 +9,10 @@ const autoprefixer = require("gulp-autoprefixer");
 const csscomb = require('gulp-csscomb');
 const cleanCSS = require("gulp-clean-css");
 const del = require("del");
+const svgmin = require('gulp-svgmin');
+const cheerio = require('gulp-cheerio');
+const replace = require('gulp-replace');
+const svgSprite = require('gulp-svg-sprite');
 const imagemin = require("gulp-imagemin");
 const browserSync = require("browser-sync").create();
 const sourcemaps = require("gulp-sourcemaps");
@@ -87,6 +91,35 @@ function scripts() {
         .pipe(browserSync.stream());
 }
 
+// Task to SVG sprite
+function svg() {
+    return gulp.src('./src/img/svg/*.svg')
+        .pipe(svgmin({
+            js2svg: {
+                pretty: true
+            }
+        }))
+        .pipe(cheerio({
+            run: function ($) {
+                $('[fill]').removeAttr('fill');
+                $('[stroke]').removeAttr('stroke');
+                $('[style]').removeAttr('style');
+            },
+            parserOptions: {
+                xmlMode: true
+            }
+        }))
+        .pipe(replace('&gt;', '>'))
+        .pipe(svgSprite({
+            mode: {
+                symbol: {
+                    sprite: "sprite.svg"
+                }
+            }
+        }))
+        .pipe(gulp.dest('./build/src/img/svg/'));
+}
+
 // Task to Optimize Images
 function images() {
     return gulp.src("./src/img/**/*")
@@ -137,6 +170,7 @@ const build = gulp.series(
         html,
         styles,
         scripts,
+        svg,
         images
     )
 );
@@ -150,6 +184,7 @@ const dev = gulp.series(
 exports.html = html;
 exports.styles = styles;
 exports.scripts = scripts;
+exports.svg = svg;
 exports.images = images;
 exports.watch = watch;
 
