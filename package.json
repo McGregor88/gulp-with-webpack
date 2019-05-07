@@ -4,6 +4,7 @@
   "description": "gulp with webpack layout",
   "main": "gulpfile.js",
   "dependencies": {
+    "core-js": "^3.0.1",
     "jquery": "^3.4.1"
   },
   "devDependencies": {
