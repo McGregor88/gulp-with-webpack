@@ -4,7 +4,7 @@
 const gulp = require("gulp");
 const pug = require("gulp-pug");
 const plumber = require("gulp-plumber");
-const concat = require("gulp-concat");
+const sass = require("gulp-sass");
 const autoprefixer = require("gulp-autoprefixer");
 const csscomb = require('gulp-csscomb');
 const cleanCSS = require("gulp-clean-css");
@@ -51,8 +51,10 @@ function html() {
 
 // Task to Compile Sass
 function styles() {
-    return gulp.src("./src/css/**/*.css")
-        .pipe(concat("styles.css"))
+    return gulp.src("./src/sass/style.sass")
+        .pipe(sass({
+            outputStyle: "expanded"
+        }).on("error", notify.onError()))
         .pipe(autoprefixer({
             browsers: ["> 0.1%"],
             cascade: false
@@ -63,6 +65,18 @@ function styles() {
         })))
         .pipe(gulp.dest("./build/src/css"))
         .pipe(browserSync.stream());
+}
+
+// Task to Compile Sass
+function css() {
+    return gulp.src("./src/sass/style.sass")
+        .pipe(sass({
+            outputStyle: "expanded"
+        }).on("error", notify.onError()))
+        .pipe(autoprefixer(["last 15 versions"]))
+        .pipe(csscomb())
+        .pipe(gulp.dest("./build/src/css/"))
+        .pipe(browsersync.stream());
 }
 
 // Task to scripts
@@ -107,7 +121,7 @@ function watch() {
         }
     });
 
-    gulp.watch("./src/css/**/*.css", styles);
+    gulp.watch("./src/sass/**/*.s+(ass|css)", gulp.parallel(styles));
     gulp.watch("./src/templates/**/*.pug", gulp.parallel(html));
 }
 

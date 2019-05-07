@@ -1,0 +1,100 @@
+// base.sass
+*
+	box-sizing: border-box
+
+button, input, optgroup, select, textarea
+	font-family: $regular
+
+html, body
+	height: 100%
+
+body
+	min-width: 320px
+	position: relative
+	background: #fff
+	font-size: 16px
+	color: #000
+	font-family: $regular
+	overflow-x: hidden
+	opacity: 1
+
+.img-responsive
+	display: block
+	max-width: 100%
+	height: auto
+
+img
+	max-width: 100%
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6
+	margin: 0
+	font-family: inherit
+	font-weight: 500
+	line-height: 1.1
+	color: inherit
+
+h1, .h1
+	font-size: 36px
+h2, .h2 
+	font-size: 30px
+h3, .h3
+	font-size: 24px
+h4, .h4
+	font-size: 18px
+h5, .h5
+	font-size: 14px
+h6, .h6
+	font-size: 12px
+
+h1, .h1,
+h2, .h2,
+h3, .h3
+	margin-top: 20px
+	margin-bottom: 10px
+
+small, .small
+	font-size: 85%
+
+a
+	color: #999
+	text-decoration: none
+	transition: color .25s ease
+	&:hover,
+	&:focus,
+	&:active,
+	&.active
+		color: #000
+		text-decoration: none
+ul
+	list-style: none
+	margin: 0
+	padding: 0
+
+.text-center
+	text-align: center
+.text-left
+	text-align: left
+.text-right
+	text-align: right
+.font-italic
+	font-style: italic
+.text-upper
+	text-transform: uppercase
+
+.valign-wrapper
+	&:before
+		display: inline-block
+		height: 100%
+		vertical-align: middle
+		content: ""
