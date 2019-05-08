@@ -1,20 +1,11 @@
 /**
  * Form elements
  */
-*::-webkit-input-placeholder
-	color: #666
-	opacity: 1
-
-*:-moz-placeholder
-	color: #666
-	opacity: 1
-
-*::-moz-placeholder
-	color: #666
-	opacity: 1
-
+*::-webkit-input-placeholder,
+*:-moz-placeholder,
+*::-moz-placeholder,
 *:-ms-input-placeholder
-	color: #666
+	color: $gray
 	opacity: 1
 
 input::-webkit-outer-spin-button,
@@ -36,7 +27,25 @@ a:focus
 
 body input:focus:required:invalid,
 body textarea:focus:required:invalid
-	color: #666
+	color: $gray
 body input:required:valid,
 body textarea:required:valid
-	color: #666
+	color: $gray
+
+.form
+	box-shadow: none
+	border-radius: 0
+	border: 0
+	background-color: transparent
+	background-image: none
+	margin: 0
+	padding: 0
+
+.form-element
+	margin-bottom: 15px
+
+div.error
+	margin-top: 0.5em
+	color: #E80F31
+	font-size: 14px
+	text-align: left

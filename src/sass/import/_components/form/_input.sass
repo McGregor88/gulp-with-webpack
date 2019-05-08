@@ -1,0 +1,31 @@
+.input
+	display: block
+	padding: 0 19px
+	margin: 0
+	+size(100%, 50px)
+	font-size: 16px
+	font-weight: 400
+	line-height: 48px
+	border-radius: 5px
+	border: 1px solid $gray
+	background-color: transparent
+	color: $black
+	transition: border-color 0.3s ease
+
+	&.error
+    	border-color: #E80F31 !important
+
+	&::placeholder
+		color: $gray
+
+	&:focus
+		border-color: $black
+
+textarea.input
+	padding:
+		top: 14px
+		bottom: 14px
+	height: 151px
+	line-height: 1em
+	resize: none
+	outline: none

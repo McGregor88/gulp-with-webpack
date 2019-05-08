@@ -2,14 +2,37 @@
  * Buttons styles
  */
 
-button
-	padding: 0
-	border: none
-	outline: none
-	cursor: pointer
-
 button,
 html [type="button"],
 [type="reset"],
 [type="submit"]
 	-webkit-appearance: inherit
+
+button
+	padding: 0
+	border: 0
+	outline: none
+	cursor: pointer
+
+.btn
+	display: inline-block
+	vertical-align: baseline
+	cursor: pointer
+	line-height: 1.2em
+	font-family: $regular
+	font-weight: 400
+	border-radius: 5px
+	border: 0
+	box-shadow: none
+	outline: none
+	text-decoration: none
+	text-align: center
+	color: $white
+
+	transition: background-color 0.25s ease, color 0.25s ease
+
+	&:hover,
+	&:focus,
+	&:active,
+	&.active
+		color: $white
