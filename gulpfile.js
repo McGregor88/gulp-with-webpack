@@ -140,6 +140,34 @@ function images() {
         .pipe(gulp.dest("./build/src/img"))
 }
 
+// Task to Optimize Images (uploads folder)
+function uploads() {
+    return gulp.src(['src/uploads/**/*'], {
+            base: 'src'
+        })
+        .pipe(imagemin([
+            imagemin.gifsicle({
+                interlaced: true
+            }),
+            imagemin.jpegtran({
+                progressive: true
+            }),
+            imagemin.optipng({
+                optimizationLevel: 5
+            }),
+            imagemin.svgo({
+                plugins: [{
+                        removeViewBox: true
+                    },
+                    {
+                        cleanupIDs: false
+                    }
+                ]
+            })
+        ]))
+        .pipe(gulp.dest('build'));
+}
+
 // Task to Watch Templates Changes and Styles
 function watch() {
     browserSync.init({
@@ -166,7 +194,8 @@ const build = gulp.series(
         styles,
         scripts,
         svg,
-        images
+        images,
+        uploads
     )
 );
 

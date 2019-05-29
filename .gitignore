@@ -10,5 +10,4 @@ Thumbs.db
 
 # Folders to ignore
 node_modules
-build/*.html
-build/src/css/styles.css
+build
